@@ -3,6 +3,8 @@ import java.io.*;
 
 public class Main {
 
+    static final int MAX = Integer.MAX_VALUE;
+
     static int N;
 
     static int[][] map,dp;
@@ -11,9 +13,11 @@ public class Main {
 
         for(int i=0;i<N;i++) {
             for(int j=0;j<N;j++) {
-                if(map[i][j]<n) map[i][j] = Integer.MAX_VALUE;
+                if(map[i][j]<n) map[i][j] = MAX;
             }
         }
+
+        init();
 
         for(int i=1;i<N;i++) {
             for(int j=1;j<N;j++) {
@@ -26,7 +30,7 @@ public class Main {
 
     static void init() {
         for(int i=0;i<N;i++) {
-            Arrays.fill(dp[i], Integer.MAX_VALUE);
+            Arrays.fill(dp[i], MAX);
         }
 
         dp[0][0] = map[0][0];
@@ -53,11 +57,13 @@ public class Main {
             }
         } //end input
 
-        int ans = Integer.MAX_VALUE;
+        int ans = MAX;
+
         //최소값을 정해두고 dp 채워보기
         for(int n=1;n<=100;n++) {
-            init();
             int tmp = solve(n);
+
+            if(tmp==MAX) continue;
 
             ans = Math.min(ans, tmp-n);
         }
