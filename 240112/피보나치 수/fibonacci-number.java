@@ -7,6 +7,11 @@ public class Main {
 
         int[] dp = new int[N+1];
 
+        if(N<=2) {
+            System.out.println(1);
+            return;
+        }
+        
         dp[1] = 1;
         dp[2] = 1;
 
