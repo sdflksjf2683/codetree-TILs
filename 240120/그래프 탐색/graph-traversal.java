@@ -43,6 +43,7 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
 
             list[start].add(end);
+            list[end].add(start);
         } //end input
 
         visit = new boolean[N+1];
