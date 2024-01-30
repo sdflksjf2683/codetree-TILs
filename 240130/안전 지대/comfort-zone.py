@@ -38,7 +38,7 @@ n,m = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(n)]
 
 safezone=0
-maxK=0
+maxK=1
 cnt=n*m #남은 땅 개수
 
 for k in range(1,101):
