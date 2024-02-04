@@ -14,15 +14,13 @@ public class Main {
         } //end input
 
         int[] dp = new int[N];
-        Arrays.fill(dp, Integer.MIN_VALUE);
-        dp[0] = 0;
 
         for(int i=0;i<N;i++) {
+            dp[i] = 1;
             for(int j=0;j<i;j++) {
-                if(dp[j]<0) continue;
-
-                if(j+arr[j]>=i) 
+                if(arr[j]<arr[i]) {
                     dp[i] = Math.max(dp[i], dp[j]+1);
+                }
             }
         }
 
