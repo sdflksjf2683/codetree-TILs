@@ -23,7 +23,7 @@ public class Main {
             dp[i] = 1;
             for(int j=0;j<i;j++) {
 
-                if(list[j].e > list[i].s) continue;
+                if(list[j].e >= list[i].s) continue;
 
                 dp[i] = Math.max(dp[i], dp[j]+1);
             }
@@ -47,7 +47,7 @@ public class Main {
 
         @Override
         public int compareTo(Meeting o) {
-            return this.e==o.e?this.e-o.e:this.s-o.s;
+            return this.s-o.s;
         }
     }
 }
