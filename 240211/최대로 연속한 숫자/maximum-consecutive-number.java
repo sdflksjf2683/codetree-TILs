@@ -2,12 +2,11 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+        int N = sc.nextInt();
+        int M = sc.nextInt();
 
         TreeSet<Integer> removeNums = new TreeSet<>();
         TreeSet<Point> lis = new TreeSet<>();
@@ -17,9 +16,8 @@ public class Main {
 
         lis.add(new Point(-1,N+1,N+1));
         
-        st = new StringTokenizer(br.readLine());
-        while(st.hasMoreTokens()) {
-            int n = Integer.parseInt(st.nextToken());
+        for(int m=0;m<M;m++) {
+            int n = sc.nextInt();
 
             removeNums.add(n);
 
