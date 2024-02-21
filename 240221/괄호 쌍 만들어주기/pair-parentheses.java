@@ -6,18 +6,18 @@ public class Main {
         char[] inputs = br.readLine().toCharArray();
         int N = inputs.length;
 
-        int[] dp = new int[N];
-        for(int i=1;i<N;i++) {
-            dp[i] = dp[i-1];
+        int[] dp = new int[100000];
+        for(int i=N-2;i>=0;i--) {
+            dp[i] = dp[i+1];
 
-            if(inputs[i-1]=='(' && inputs[i]=='(')
+            if(inputs[i]==')' && inputs[i+1]==')')
                 dp[i]++;
         }
 
         long ans=0;
-        for(int i=N-1;i>=1;i--) {
-            if(inputs[i]==')' && inputs[i-1]==')') {
-                ans += dp[i-2];
+        for(int i=0;i<N-2;i++) {
+            if(inputs[i]=='(' && inputs[i+1]=='(') {
+                ans += dp[i+2];
             }
         }
         
