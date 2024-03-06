@@ -40,8 +40,8 @@ public class Main {
 
         Arrays.sort(arr);
 
-        int l=0,r=1_000_00;
-        int ans = Integer.MAX_VALUE;
+        int l=0,r=Integer.MAX_VALUE;
+        int ans=Integer.MAX_VALUE;
 
         while(l<=r) {
             int mid = (l+r)/2;
