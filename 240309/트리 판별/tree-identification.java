@@ -47,6 +47,10 @@ public class Main {
                 root = e.getKey();
             }
         }
+
+        if(root<0)
+            return false;
+
         return true;
     }
 
@@ -71,18 +75,14 @@ public class Main {
             map.put(a, map.getOrDefault(a,0)); //루트노드일 경우 0 저장 
         } //end input
 
+        int ans=1;
         //1번&2번 조건 체크 및 루트노드 찾기
         if(!findRoot()) {
-            System.out.println(0);
-            return;
+            ans=0;
+        } else if(!findPath()) { //경로 탐색(3번 조건 체크)
+            ans=0;
         }
 
-        //경로 탐색(3번 조건 체크)
-        if(!findPath()) {
-            System.out.println(0);
-            return;
-        }
-
-        System.out.println(1);
+        System.out.println(ans);
     }
 }
