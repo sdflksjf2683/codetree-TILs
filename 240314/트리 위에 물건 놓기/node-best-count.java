@@ -5,7 +5,6 @@ public class Main {
 
     static int N;
 
-    static int[] parent;
     static boolean[] visit;
     
     static int[][] dp;
@@ -17,7 +16,6 @@ public class Main {
             if(visit[next]) continue;
 
             visit[next] = true;
-            parent[next] = tmp;
             dfs(next);
         }
 
@@ -25,7 +23,6 @@ public class Main {
         dp[tmp][1] = 1; //물건을 두는 경우 기본값은 1
 
         for(int next: tree[tmp]) {
-            if(parent[next]!=tmp) continue;
 
             dp[tmp][0] += dp[next][1]; //간선을 이루는 두 노드 중 한 노드엔 반드시 물건을 두어야 함.
             dp[tmp][1] += Math.min(dp[next][0], dp[next][1]); //현재 노드에 물건이 있다면 연결된 노드의 물건 여부는 중요X
@@ -53,7 +50,6 @@ public class Main {
 
         dp = new int[N+1][2];
         visit = new boolean[N+1];
-        parent = new int[N+1];
 
         visit[1] = true;
         dfs(1);
