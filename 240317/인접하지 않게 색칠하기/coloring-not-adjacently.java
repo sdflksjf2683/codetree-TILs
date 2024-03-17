@@ -23,17 +23,13 @@ public class Main {
             visit[next] = true;
             dfs(next);
 
-            //색칠하지 않는 경우
-            for(int k=K;k>=0;k--) {
-                for(int i=0;i<=k;i++) {
-                    int maxVal = Math.max(dp[next][i][0], dp[next][i][1]);
-                    dp[tmp][k][0] = Math.max(dp[tmp][k][0], dp[tmp][k-i][0]+maxVal);
-                }
-            }
+            dp[tmp][0][0] = Math.max(dp[tmp][0][0], dp[tmp][0][0]+Math.max(dp[next][0][0], dp[next][0][1]));
 
-            //색칠하는 경우
             for(int k=K;k>=1;k--) {
                 for(int i=1;i<=k;i++) {
+                    int maxVal = Math.max(dp[next][i][0], dp[next][i][1]);
+                    dp[tmp][k][0] = Math.max(dp[tmp][k][0], dp[tmp][k-i][0]+maxVal);
+
                     dp[tmp][k][1] = Math.max(dp[tmp][k][1], dp[tmp][k-i][1]+dp[next][i][0]);
                 }
             }
@@ -74,7 +70,7 @@ public class Main {
         dfs(1);
 
         int ans = 0;
-        for(int k=0;k<=K;k++) {
+        for(int k=1;k<=K;k++) {
             ans = Math.max(dp[1][k][0], ans);
             ans = Math.max(dp[1][k][1], ans);
         }
