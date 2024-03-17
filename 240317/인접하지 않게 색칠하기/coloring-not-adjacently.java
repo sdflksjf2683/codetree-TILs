@@ -1,80 +1,72 @@
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
+    public static final int MAX_K = 10;
+    public static final int MAX_N = 100000;
+    
+    public static int n, k;
+    public static ArrayList<Integer>[] edges = new ArrayList[MAX_N + 1];
+    public static boolean[] visited = new boolean[MAX_N + 1];
+    public static int[] a = new int[MAX_N + 1];
+    public static int[][][] dp = new int[MAX_N + 1][MAX_K + 1][2];
+    public static int ans;
+    
+    public static void dfs(int x) {
+        dp[x][1][1] = a[x];
+        dp[x][0][0] = 0;
+    
+        for(int l = 0; l < edges[x].size(); l++) {
+            int y = edges[x].get(l);
+    
+            if(visited[y]) 
+                continue;
+    
+            visited[y] = true;
+            dfs(y);
 
-    static int N,K;
+            for(int i = k; i >= 1; i--)
+                for(int j = 1; j <= i; j++)
+                    dp[x][i][1] = Math.max(dp[x][i][1], dp[x][i - j][1] + dp[y][j][0]);
 
-    static int[] nodes; //각 노드들의 값 저장
-    static boolean[] visit;
-
-    static int[][][] dp; //1: 노드번호, 2: 색칠한 노드 개수(서브트리에서), 3: 현재 노드 색칠 여부
-
-    static ArrayList<Integer>[] tree;
-
-    static void dfs(int tmp) {
-        //초기값
-        dp[tmp][0][0] = 0; //현재 노드를 색칠하지 않을 때
-        dp[tmp][1][1] = nodes[tmp]; //현재 노드를 최초로 색칠했을 때
-
-        for(int next: tree[tmp]) {
-            if(visit[next]) continue;
-
-            visit[next] = true;
-            dfs(next);
-
-            dp[tmp][0][0] = Math.max(dp[tmp][0][0], dp[tmp][0][0]+Math.max(dp[next][0][0], dp[next][0][1]));
-
-            for(int k=K;k>=1;k--) {
-                for(int i=1;i<=k;i++) {
-                    int maxVal = Math.max(dp[next][i][0], dp[next][i][1]);
-                    dp[tmp][k][0] = Math.max(dp[tmp][k][0], dp[tmp][k-i][0]+maxVal);
-
-                    dp[tmp][k][1] = Math.max(dp[tmp][k][1], dp[tmp][k-i][1]+dp[next][i][0]);
-                }
-            }
+            for(int i = k; i >= 0; i--)
+                for(int j = 0; j <= i; j++)
+                    dp[x][i][0] = Math.max(dp[x][i][0], 
+                                           dp[x][i - j][0] + 
+                                           Math.max(dp[y][j][0], dp[y][j][1]));
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        tree = new ArrayList[N+1];
-        for(int i=1;i<=N;i++) {
-            tree[i] = new ArrayList<>();
+        n = sc.nextInt();
+
+        for(int i = 1; i <= n; i++)
+            edges[i] = new ArrayList<>();
+
+        for(int i = 1; i <= n - 1; i++) {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            
+            edges[x].add(y);
+            edges[y].add(x);
         }
 
-        StringTokenizer st;
-        for(int i=1;i<N;i++) {
-            st = new StringTokenizer(br.readLine());
-            int from = Integer.parseInt(st.nextToken());
-            int to = Integer.parseInt(st.nextToken());
+        for(int i = 1; i <= n; i++)
+            a[i] = sc.nextInt();
 
-            tree[from].add(to);
-            tree[to].add(from);
-        }
+        k = sc.nextInt();
 
-        nodes = new int[N+1];
-        for(int i=1;i<=N;i++) {
-            nodes[i] = Integer.parseInt(br.readLine());
-        }
-
-        K = Integer.parseInt(br.readLine());
-        //end input
-
-        dp = new int[N+1][K+1][2];
-        visit = new boolean[N+1];
-
-        visit[1] = true;
+        visited[1] = true;
         dfs(1);
 
-        int ans = 0;
-        for(int k=1;k<=K;k++) {
-            ans = Math.max(dp[1][k][0], ans);
-            ans = Math.max(dp[1][k][1], ans);
+
+        for(int i = 1; i <= k; i++) {
+            ans = Math.max(ans, dp[1][i][0]);
+            ans = Math.max(ans, dp[1][i][1]);
         }
 
-        System.out.println(ans);
+        System.out.print(ans);
     }
 }
