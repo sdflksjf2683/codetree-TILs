@@ -31,7 +31,7 @@ public class Main {
         int k=0,l=0;
         while(l<=r) {
             int mid = (l+r)/2;
-            if(isPossible(mid)) {
+            if(mid>0 && isPossible(mid)) {
                 k = mid;
                 l = mid+1;
             } else {
