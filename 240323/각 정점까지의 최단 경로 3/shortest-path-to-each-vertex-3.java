@@ -12,26 +12,25 @@ public class Main {
     static ArrayList<Node>[] graph;
 
     static void dijkstra() {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        boolean[] visit = new boolean[N+1];
+        PriorityQueue<Node> pq = new PriorityQueue<>();
 
-        pq.offer(1); //1번 노드에서 시작
+        pq.offer(new Node(1,0)); //1번 노드에서 시작
         dist[1] = 0;
 
         while(!pq.isEmpty()) {
-            int tmp = pq.poll();
+            int tmpv = pq.peek().v;
+            int tmpw = pq.poll().w;
 
-            if(visit[tmp]) continue;
+            if(tmpw!=dist[tmpv]) continue;
 
-            visit[tmp] = true;
+            for(Node next: graph[tmpv]) {
+                int nextv = next.v;
+                int nextw = next.w;
 
-            for(Node next: graph[tmp]) {
-                int nv = next.v;
-                int nw = next.w;
-
-                if(dist[nv]>dist[tmp]+nw) {
-                    dist[nv] = dist[tmp]+nw;
-                    pq.offer(nv);
+                int newdist = dist[tmpv]+nextw;
+                if(dist[nextv]>newdist) {
+                    dist[nextv] = newdist;
+                    pq.offer(new Node(nextv, newdist));
                 }
             }
         }
@@ -72,12 +71,17 @@ public class Main {
         System.out.println(sb.toString());
     }
 
-    static class Node {
+    static class Node implements Comparable<Node> {
         int v,w;
 
         public Node(int v, int w) {
             this.v = v;
             this.w = w;
+        }
+
+        @Override
+        public int compareTo(Node o) {
+            return this.w-o.w;
         }
     }
 }
