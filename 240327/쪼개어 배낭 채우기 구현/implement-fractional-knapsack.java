@@ -47,7 +47,12 @@ public class Main {
 
         @Override
         public int compareTo(Gem o) {
-            return (int)((o.pricePerWeight-this.pricePerWeight)*1000);
+            double res = o.pricePerWeight-this.pricePerWeight;
+
+            if(res<0) return -1;
+            if(res==0) return 0;
+
+            return 1;
         }
     }
 }
