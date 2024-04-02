@@ -47,11 +47,10 @@ public class Main {
 
         @Override
         public int compareTo(BlackStone o) {
-            if(o.b==this.b) {
-                return o.a-this.a;
-            }
+            int thisGap = this.b-this.a;
+            int oGap = o.b-o.a;
 
-            return o.b-this.b;
+            return thisGap-oGap;
         }
     }
 }
