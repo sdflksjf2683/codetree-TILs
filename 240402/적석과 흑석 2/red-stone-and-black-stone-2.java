@@ -26,9 +26,9 @@ public class Main {
         int ans=0;
         while(!pq.isEmpty() && !redStone.isEmpty()) { //빨간돌 or 검정돌을 모두 사용하기 전까지 계속해서 매핑
             BlackStone black = pq.poll();
-            Integer red = redStone.ceiling(black.a);
+            Integer red = redStone.floor(black.b);
 
-            if(red!=null && red<=black.b) {
+            if(red!=null && red>=black.a) {
                 redStone.remove(red);
                 ans++;
             }
@@ -47,6 +47,10 @@ public class Main {
 
         @Override
         public int compareTo(BlackStone o) {
+            if(o.b==this.b) {
+                return o.a-this.a;
+            }
+
             return o.b-this.b;
         }
     }
