@@ -8,10 +8,10 @@ public class Main {
     static int[][] map;
 
     static void checkCal(int j) {
-        int tmp = map[0][j]; //연속되는 숫자 저장
+        int tmp=0; //연속되는 숫자 저장
         int cnt=1;//연속되는 횟수 카운트
 
-        for(int i=1;i<N;i++) {
+        for(int i=0;i<N;i++) {
             if(map[i][j]==tmp) { //연속되는 숫자인 경우
                 cnt++;
             } else {
@@ -27,10 +27,10 @@ public class Main {
     }
 
     static void checkRow(int i) {
-        int tmp = map[i][0]; //연속되는 숫자 저장
+        int tmp=0; //연속되는 숫자 저장
         int cnt=1;//연속되는 횟수 카운트
 
-        for(int j=1;j<N;j++) {
+        for(int j=0;j<N;j++) {
             if(map[i][j]==tmp) { //연속되는 숫자인 경우
                 cnt++;
             } else {
