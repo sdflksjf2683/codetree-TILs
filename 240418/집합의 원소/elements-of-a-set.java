@@ -45,7 +45,7 @@ public class Main {
             if(cmd.equals("0"))
                 union(a,b);
             else {
-                if(parent[a]==parent[b])
+                if(find(a)==find(b))
                     sb.append("1\n");
                 else
                     sb.append("0\n");
