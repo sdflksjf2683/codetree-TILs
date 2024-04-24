@@ -18,17 +18,6 @@ public class Main {
         return root; 
     }
 
-    static void union(int x, int y) {
-        x = find(x);
-        y = find(y);
-
-        if(x<y) {
-            parent[y] = x;
-        } else {
-            parent[x] = y;
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -47,11 +36,14 @@ public class Main {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
 
-            for(int i=a;i<b;i++) {
-                if(parent[i]!=parent[b]) {
-                    N--;
-                    union(i,b);
-                }
+            while(true) {
+                a = find(a);
+
+                if(a>=b) break;
+
+                parent[a] = a+1;
+                a++;
+                N--;
             }
             sb.append(N+"\n");
         }
