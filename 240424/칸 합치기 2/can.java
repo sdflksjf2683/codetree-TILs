@@ -12,14 +12,19 @@ public class Main {
             return x;
         }
 
-        return find(parent[x]);
+        int root = find(parent[x]);
+        parent[x] = root;
+
+        return root; 
     }
 
     static void union(int x, int y) {
         x = find(x);
         y = find(y);
 
-        if(x!=y) {
+        if(x<y) {
+            parent[y] = x;
+        } else {
             parent[x] = y;
         }
     }
