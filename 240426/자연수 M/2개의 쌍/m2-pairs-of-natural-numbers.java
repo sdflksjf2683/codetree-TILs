@@ -33,13 +33,11 @@ public class Main {
             //두 숫자의 남은 개수에 차이가 있는 경우
             //더 적은 숫자의 개수를 더 많은 숫자의 개수에서 빼주고 더 적은 쪽 포인터를 옮김(어차피 같은 값이므로 스킵 가능)
             if(nums[l][1]<nums[r][1]) {
+                nums[r][1]-=nums[l][1]; 
                 l++;
-                nums[r][1] -= nums[l][1]; 
-                continue;
             } else if(nums[l][1]>nums[r][1]) {
+                nums[l][1]-=nums[r][1];
                 r--;
-                nums[l][1] -= nums[r][1];
-                continue;
             } else { //개수가 동일하다면 포인터 둘 다 이동
                 l++;
                 r--;
