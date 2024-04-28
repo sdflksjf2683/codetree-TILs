@@ -15,32 +15,31 @@ public class Main {
         manacher[N-1] = '#';
 
         int[] A = new int[N];
-        int tmpr=-1; //j<i일 때 가장 큰 j+A[j] 값
-        int j = -1; //j+A[j](=tmpr) 가 가장 클 때의 j값
+        int r=-1; //j<i일 때 가장 큰 j+A[j] 값
+        int j = -1; //j+A[j](=r) 가 가장 클 때의 j값
         //0번부터 중심점을 잡고 펠린드롬 찾아보기
         for(int i=0;i<N;i++) {
 
             //j를 기준으로 대칭 위치에 있는 ri를 중심으로 이미 구한 펠린드롬 길이를 이용해 
             //초기값을 잡아 연산을 줄일 수 있다.
-            if(j>=i) {
-                int ni = 2*j-1;
-                A[i] = Math.min(j-i, A[ni]);
+            if(r>=i) {
+                int ni = 2*j-i;
+                A[i] = Math.min(r-i, A[ni]);
             }
 
             //중심점 i를 기준으로 양쪽을 확인하며 범위 늘려가기
+            //범위(0~N)를 벗어나지 않으면서 펠린드롬이면 반지름 길이를 늘리고 반복
             while(i-A[i]-1>=0 && i+A[i]+1<N && manacher[i-A[i]-1]==manacher[i+A[i]+1]) {
-                //범위(0~N)를 벗어나지 않으면서 펠린드롬이면 반지름 길이를 늘리고 반복
                 A[i]++;
+            }
 
-                if(i+A[i]>tmpr) { //최댓값 갱신
-                    tmpr = i+A[i];
-                    j = i;
-                }
+            if(i+A[i]>r) { //최댓값 갱신
+                r = i+A[i];
+                j = i;
             }
         }
 
         Arrays.sort(A); //오름차순 정렬 -> 가장 긴 반지름 길이는 A[N-1]에 저장
         System.out.println(A[N-1]); //처음에 문자 사이에 #을 넣어줬기 때문에 2배는 계산하지 않음.
-
     }
 }
