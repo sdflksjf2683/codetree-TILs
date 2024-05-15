@@ -15,7 +15,7 @@ public class Main {
             int start = Integer.parseInt(st.nextToken());
             int speed = Integer.parseInt(st.nextToken());
 
-            long end = start+speed*T; //도착점 계산
+            long end = start+(long)speed*T; //도착점 계산
             //출발 기준 오름차순이므로 현재 사람이 T분 후에 도착한 지점보다 더 멀리 도착한 사람이 존재할 경우
             //그 사람은 현재 사람을 반드시 지나치게 되어있다.
             while(set.higher(end)!=null) {
