@@ -29,12 +29,11 @@ public class Main {
         visit = new boolean[N][M];
 
         q.offer(new int[] {0,0});
+        visit[0][0] = true;
 
         while(!q.isEmpty()) {
             int ti = q.peek()[0];
             int tj = q.poll()[1];
-
-            visit[ti][tj] = true;
 
             for(int d=0;d<4;d++) {
                 int ni = ti+di[d];
@@ -46,8 +45,10 @@ public class Main {
 
                 if(map[ni][nj]==0) { //같은 테두리면 계속해서 탐색 진행
                     q.offer(new int[] {ni,nj});
+                    visit[ni][nj] = true;
                 } else if(map[ni][nj]==1) { //녹일 빙하 발견
                     map[ni][nj] = 2;
+                    visit[ni][nj] = true;
                 }
             }
         }
