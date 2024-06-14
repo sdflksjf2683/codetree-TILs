@@ -35,6 +35,7 @@ public class Main {
             map.put(arr[r], map.getOrDefault(arr[r],0)+1);
             r++;
         }
+        max = Math.max(max, r-l); //종료 후 최댓값 갱신(엣지케이스1: 전체 수열이 조건을 만족하는 경우)
 
         System.out.println(max);
     }
