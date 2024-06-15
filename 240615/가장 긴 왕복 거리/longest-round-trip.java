@@ -60,9 +60,7 @@ public class Main {
 
         int max = -1;
         int[] returnDist = dijkstra(X); //돌아오는 경로
-        for(int i=1;i<=N;i++) {
-            System.out.print(returnDist[i]+" ");
-        }
+
         for(int n=1;n<=N;n++) { //N개의 노드에서 X번 노드까지 최단거리를 모두 구해본 후 최댓값 찾기
             int[] dist = dijkstra(n);
             max = Math.max(dist[X]+returnDist[n], max);
