@@ -13,10 +13,13 @@ public class Main {
         } //end input
 
         int[] dp = new int[N+1];
+        int ans = Integer.MIN_VALUE;
+
         for(int i=1;i<=N;i++) {
             dp[i] = Math.max(arr[i], dp[i-1]+arr[i]);
+            ans = Math.max(ans, dp[i]);
         }
 
-        System.out.println(dp[N]);
+        System.out.println(ans);
     }
 }
