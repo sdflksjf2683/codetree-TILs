@@ -6,6 +6,7 @@ public class Main {
     static int N,M,ans;
 
     static int[][] map;
+    static boolean[][] visit;
 
     static int[] di = {1,0};
     static int[] dj = {0,1};
@@ -16,17 +17,15 @@ public class Main {
             return;
         }
 
-        if(ans==1) {
-            return;
-        }
 
         for(int d=0;d<2;d++) {
             int ni = ti+di[d];
             int nj = tj+dj[d];
 
             if(ni<0 || ni>=N || nj<0 || nj>=M) continue;
-            if(map[ni][nj]==0) continue;
+            if(map[ni][nj]==0 || visit[ni][nj]) continue;
 
+            visit[ni][nj] = true;
             dfs(ni,nj);
         }
     }
@@ -39,6 +38,7 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
 
         map = new int[N][M];
+        visit = new boolean[N][M];
 
         for(int i=0;i<N;i++) {
             st = new StringTokenizer(br.readLine());
@@ -49,6 +49,7 @@ public class Main {
 
         ans = 0;
 
+        visit[0][0] = true;
         dfs(0,0);
 
         System.out.println(ans);
