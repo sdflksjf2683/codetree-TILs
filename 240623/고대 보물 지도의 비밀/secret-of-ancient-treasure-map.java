@@ -19,9 +19,6 @@ public class Main {
         } //end input
 
         int[][] dp = new int[N+1][K+1];
-        for(int i=1;i<=N;i++) {
-            Arrays.fill(dp[i], INF);
-        }
 
         int ans = INF;
         for(int i=1;i<=N;i++) {
@@ -33,7 +30,7 @@ public class Main {
             } else {
                 for(int j=0;j<K;j++) {
                     dp[i][j+1] = Math.max(dp[i-1][j]+arr[i], arr[i]);
-                    ans = Math.max(ans, dp[i][j]);
+                    ans = Math.max(ans, dp[i][j+1]);
                 }
             }
         }
