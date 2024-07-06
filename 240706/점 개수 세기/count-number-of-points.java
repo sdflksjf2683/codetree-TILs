@@ -10,8 +10,10 @@ public class Main {
     static HashMap<Integer, Integer> map;
 
     static int getKey(int tmp) {
-        Integer res = set.floor(tmp);
-        return res==null?0:res;
+        if(map.get(set.floor(tmp))==null)
+            return 0;
+
+        return map.get(set.floor(tmp));
     }
 
     static void gridCompression() { //좌표 압축을 진행하는 메소드
@@ -48,9 +50,6 @@ public class Main {
 
             s = getKey(s-1);
             e = getKey(e);
-
-            s = s==0?0:map.get(getKey(s));
-            e = e==0?0:map.get(getKey(e));
 
             sb.append((e-s)+"\n");
         }
