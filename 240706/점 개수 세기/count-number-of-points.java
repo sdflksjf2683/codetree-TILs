@@ -9,16 +9,8 @@ public class Main {
 
     static HashMap<Integer, Integer> map;
 
-    static int getKey(int tmp, boolean flag) {
-        //flag가 true면 현재 값에서 가장 가까운 큰 값을, false면 작은 값을 리턴
-        Integer res;
-
-        if(flag) {
-            res = set.ceiling(tmp);
-        } else {
-            res = set.floor(tmp);
-        }
-
+    static int getKey(int tmp) {
+        Integer res = set.floor(tmp);
         return res==null?0:res;
     }
 
@@ -54,18 +46,13 @@ public class Main {
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
 
-            s = getKey(s, true);
-            e = getKey(e, false);
+            s = getKey(s-1);
+            e = getKey(e);
 
-            if(s==0 || e==0) { //시작점이 가장 오른쪽 점보다 크거나 종료점이 가장 왼쪽 점보다 작은 경우=포함하는 점 없음
-                sb.append(0+"\n");
-                continue;
-            }
+            s = s==0?0:map.get(getKey(s));
+            e = e==0?0:map.get(getKey(e));
 
-            s = map.get(s);
-            e = map.get(e);
-
-            sb.append((e-s+1)+"\n");
+            sb.append((e-s)+"\n");
         }
 
         System.out.println(sb.toString());
