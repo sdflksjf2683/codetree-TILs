@@ -54,8 +54,16 @@ public class Main {
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
 
-            s = map.get(getKey(s, true));
-            e = map.get(getKey(e, false));
+            s = getKey(s, true);
+            e = getKey(e, false);
+
+            if(s==0 || e==0) { //시작점이 가장 오른쪽 점보다 크거나 종료점이 가장 왼쪽 점보다 작은 경우=포함하는 점 없음
+                sb.append(0+"\n");
+                continue;
+            }
+
+            s = map.get(s);
+            e = map.get(e);
 
             sb.append((e-s+1)+"\n");
         }
