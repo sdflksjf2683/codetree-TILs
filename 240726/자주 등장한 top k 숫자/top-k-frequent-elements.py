@@ -29,5 +29,5 @@ def useCounter():
     heapq.heapify(heap)
     return [-heapq.heappop(heap)[1] for _ in range(k)]
 
-print(*useDict())
-# print(*useCounter())
+# print(*useDict())
+print(*useCounter())
