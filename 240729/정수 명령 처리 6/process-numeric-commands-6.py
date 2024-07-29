@@ -36,7 +36,8 @@ N = int(input())
 pq = PriorityQueue()
 
 for _ in range(N):
-    cmd = input().rstrip()
+    parts = input().rstrip().split()
+    cmd = parts[0]
 
     if cmd=='size':
         print(str(pq.size()))
@@ -51,7 +52,7 @@ for _ in range(N):
         print(str(pq.top()))
     
     else:
-        pq.push(int(cmd[-1]))
+        pq.push(int(parts[1]))
         continue
     
     print('\n')
