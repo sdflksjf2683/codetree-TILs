@@ -16,7 +16,7 @@ def get_median() -> None:
         else:
             heappush(right, n)
         
-        if i%2==0:
+        if i%2!=0:
             continue
         
         #홀수번째 숫자일 경우 중앙값 갱신 후 배열에 저장
@@ -24,10 +24,11 @@ def get_median() -> None:
         if len(left) > len(right):
             heappush(right, mid)
             mid = -heappop(left)
-        else:
+        elif len(left) < len(right):
             heappush(left, -mid)
             mid = heappop(right)
         
+        #두 힙의 크기가 같다면 중앙값 갱신X
         ans.append(mid)
     
     #지금까지 찾은 중앙값 출력
